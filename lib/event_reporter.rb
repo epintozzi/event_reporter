@@ -46,6 +46,10 @@ class EventReporter
     return count
   end
 
+  def queue_clear
+    @queue = []
+  end
+
   def get_command
     print "Please enter a command"
     gets.chomp
@@ -60,5 +64,7 @@ end
 report = EventReporter.new
 
 puts report.queue_count
-puts report.create_queue
+report.create_queue
+puts report.queue_count
+report.queue_clear
 puts report.queue_count
