@@ -1,14 +1,16 @@
 require "csv"
 require "./lib/Person"
+require "./lib/data_manipulation"
 require 'pry'
 
 class EventReporter
-  # attr_accessor :queue
+  attr_accessor :queue
 
   def initialize(queue = [])
     @queue = queue
   end
 
+#move clean_zip, clean_phone, & first/last_name to data_manipulation class
   def clean_zipcode(zipcode)
     zipcode.to_s.rjust(5, "0")[0..4]
   end
@@ -25,6 +27,14 @@ class EventReporter
     end
   end
 
+  def clean_first_name(first_name)
+    first_name.strip
+  end
+
+  def clean_last_name(last_name)
+    last_name.strip
+  end
+
   def load_file(filename = "./event_attendees_short.csv")
 
     contents = CSV.open filename, headers: true, header_converters: :symbol
@@ -34,7 +44,7 @@ class EventReporter
 
   def create_queue
     load_file.each do |row|
-      person = Person.new(row[0], row[:regdate], row[:first_name], row[:last_name], row[:email_address], clean_phone(row[:home_phone]), row[:street], row[:city], row[:state], clean_zipcode(row[:zipcode]))
+      person = Person.new(row[0], row[:regdate], clean_first_name(row[:first_name]), clean_last_name(row[:last_name]), row[:email_address], clean_phone(row[:home_phone]), row[:street], row[:city], row[:state], clean_zipcode(row[:zipcode]))
 
       @queue << person
     end
@@ -64,7 +74,7 @@ end
 report = EventReporter.new
 
 puts report.queue_count
-report.create_queue
+puts report.create_queue
 puts report.queue_count
-report.queue_clear
-puts report.queue_count
+# report.queue_clear
+# puts report.queue_count
