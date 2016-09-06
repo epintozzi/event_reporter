@@ -2,6 +2,9 @@ require "csv"
 require "./lib/Person"
 require "./lib/data_manipulation"
 require 'pry'
+require 'sunlight-congress'
+
+Sunlight::Congress.api_key = "58bb7693ce0a4982ab43bc76643ab066"
 
 class EventReporter
   attr_accessor :queue
@@ -60,6 +63,16 @@ class EventReporter
     @queue = []
   end
 
+  def queue_district_by_zipcode(zipcode)
+    Sunlight::Congress::District.by_zipcode(zipcode)
+    return 
+  end
+
+  # def find(attribute, criteria)
+  #
+  #
+  # end
+
   def get_command
     print "Please enter a command"
     gets.chomp
@@ -69,12 +82,40 @@ class EventReporter
     "You can use the following commands: 'queue count', 'queue clear', 'queue district', 'queue print', 'queue print by', 'queue save to', 'queue export html', and 'find'."
   end
 
+  def help(command)
+    if command.downcase == "queue count"
+      return "This command outputs how many records are in the current queue."
+    end
+    if command.downcase == "queue clear"
+      return "This command empties the queue."
+    end
+    if command.downcase == "queue district"
+      return "If there are 10 or fewer entries in the queue, this command will get Congressional District information for each entry."
+    end
+    if command.downcase == "queue print"
+      return "This command prints a table displaying the registrant information for the people in your queue"
+    end
+    if command.downcase == "queue print by"
+      return "This command prints the data table sorted by the specified attribute, for example: zipcode."
+    end
+    if command.downcase == "queue save to"
+      return "This command exports the current queue to the specified filename as a CSV."
+    end
+    if command.downcase == "queue export html"
+      return "This command exports the current queue to the specified filename as a valid HTML file."
+    end
+    if command.downcase == "find"
+      return "This command loads the queue with all records matching the criteria for the given attribute."
+    end
+  end
 end
 
 report = EventReporter.new
 
-puts report.queue_count
-puts report.create_queue
-puts report.queue_count
+# puts report.help("queue count")
+puts report.queue_district_by_zipcode("60402")
+# puts report.queue_count
+# puts report.create_queue
+# puts report.queue_count
 # report.queue_clear
 # puts report.queue_count
