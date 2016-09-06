@@ -3,6 +3,11 @@ require "./lib/Person"
 require 'pry'
 
 class EventReporter
+  # attr_accessor :queue
+
+  def initialize(queue = [])
+    @queue = queue
+  end
 
   def clean_zipcode(zipcode)
     zipcode.to_s.rjust(5, "0")[0..4]
@@ -28,16 +33,23 @@ class EventReporter
   end
 
   def create_queue
-    queue = []
-
     load_file.each do |row|
       person = Person.new(row[0], row[:regdate], row[:first_name], row[:last_name], row[:email_address], clean_phone(row[:home_phone]), row[:street], row[:city], row[:state], clean_zipcode(row[:zipcode]))
 
-      queue << person
+      @queue << person
     end
-    return queue
+    return @queue
   end
 
+  def queue_count
+    count = @queue.count
+    return count
+  end
+
+  def get_command
+    print "Please enter a command"
+    gets.chomp
+  end
 
   def help
     "You can use the following commands: 'queue count', 'queue clear', 'queue district', 'queue print', 'queue print by', 'queue save to', 'queue export html', and 'find'."
@@ -46,4 +58,7 @@ class EventReporter
 end
 
 report = EventReporter.new
+
+puts report.queue_count
 puts report.create_queue
+puts report.queue_count
