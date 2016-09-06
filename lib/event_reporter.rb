@@ -1,5 +1,6 @@
 require "csv"
 require "./lib/Person"
+require 'pry'
 
 class EventReporter
 
@@ -8,17 +9,14 @@ class EventReporter
   end
 
   def clean_phone(phone)
-    phone = phone.gsub(/\D/, "")
-    if phone.length > 11 or phone.length < 10
-      return "0000000000"
-    elsif phone.length == 11
-      if phone[0] == 1
-        phone = phone[1..11]
-      else
-        phone = "0000000000"
-      end
-    else
+    return "0000000000" if phone.nil?
+    phone = phone.to_s.gsub(/\D/, "")
+    if phone.length == 10
       return phone
+    elsif phone.length == 11 and phone[0] == "1"
+      return phone[1..11]
+    else
+      return "0000000000"
     end
   end
 
@@ -26,23 +24,18 @@ class EventReporter
 
     contents = CSV.open filename, headers: true, header_converters: :symbol
 
-    contents.each do |row|
-      id = row[0]
-      reg_date = row[:regdate]
-      first_name = row[:first_name]
-      last_name = row[:last_name]
-      email_address = row[:email_address]
-      home_phone = clean_phone(row[:home_phone])
-      street = row[:street]
-      city = row[:city]
-      state = row[:state]
-      zipcode = clean_zipcode(row[:zipcode])
-    end
+    return contents
   end
 
-  def create_person
+  def create_queue
+    queue = []
 
+    load_file.each do |row|
+      person = Person.new(row[0], row[:regdate], row[:first_name], row[:last_name], row[:email_address], clean_phone(row[:home_phone]), row[:street], row[:city], row[:state], clean_zipcode(row[:zipcode]))
 
+      queue << person
+    end
+    return queue
   end
 
 
@@ -51,3 +44,6 @@ class EventReporter
   end
 
 end
+
+report = EventReporter.new
+puts report.create_queue
