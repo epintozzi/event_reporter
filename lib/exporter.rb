@@ -1,6 +1,7 @@
 require "csv"
 require "pry"
 require "terminal-table"
+require "erb"
 
 class Exporter
 
@@ -13,7 +14,18 @@ class Exporter
     end
   end
 
-  def export_to_html
+  def export_to_html(queue, filename = "queue_results.html")
+    template = File.read "html_form.erb"
+    erb_template = ERB.new template
+    html_form = erb_template.result(binding)
+
+    File.open(filename, "w") do |file|
+      file.puts html_form
+    end
+
+    template = File.read "html_form.erb"
+    erb_template = ERB.new template
+
 
   end
 

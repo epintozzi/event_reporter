@@ -50,6 +50,11 @@ class EventReporter
     exporter.print_queue(@queue)
   end
 
+  def export_to_html
+    exporter = Exporter.new
+    exporter.export_to_html(@queue)
+  end
+
   def queue_district_by_zipcode(zipcode)
     Sunlight::Congress::District.by_zipcode(zipcode)
   end
@@ -93,5 +98,6 @@ end
 
 report = EventReporter.new
 report.create_queue
-puts report.save_to_csv
-puts report.print_queue
+report.export_to_html
+# puts report.save_to_csv
+# puts report.print_queue

@@ -1,0 +1,35 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Queue</title>
+</head>
+<body>
+  <h3>Welcome to your queue!</h3>
+  <p>Please find your results below</p>
+
+  <table>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Email</th>
+      <th>Zipcode</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Address</th>
+      <th>Phone</th>
+    </tr>
+    <% queue.each do |person| %>
+      <tr>
+        <td><%= "#{person.last_name}"%></td>
+        <td><%= "#{person.first_name}"%></td>
+        <td><%= "#{person.email_address}"%></td>
+        <td><%= "#{person.zipcode}" %></td>
+        <td><%= "#{person.city}" %></td>
+        <td><%= "#{person.state}"%></td>
+        <td><%= "#{person.street}"%></td>
+        <td><%= "#{person.home_phone}"%></td>
+      </tr>
+    <% end %>
+  </table>
+</body>
+</html>
