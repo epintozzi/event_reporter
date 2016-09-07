@@ -11,7 +11,6 @@ class Exporter
         csv << [person.last_name, person.first_name, person.email_address, person.zipcode, person.city, person.state, person.street, person.home_phone]
       end
     end
-
   end
 
   def export_to_html
@@ -27,15 +26,4 @@ class Exporter
     return table
   end
 
-
-  # def print_queue(queue)
-  #   CSV.generate(col_sep: "\t") do |csv|
-  #     csv << ["LAST NAME", "FIRST NAME", "EMAIL", "ZIPCODE", "CITY", "STATE", "ADDRESS", "PHONE"]
-  #     queue.each do |person|
-  #       csv << [person.last_name, person.first_name, person.email_address, person.zipcode, person.city, person.state, person.street, person.home_phone]
-  #     end
-  #   end
-  # end
 end
-# export = Exporter.new
-# puts export.print_queue

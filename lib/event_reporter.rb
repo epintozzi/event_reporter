@@ -93,5 +93,5 @@ end
 
 report = EventReporter.new
 report.create_queue
-# puts report.save_to_csv
+puts report.save_to_csv
 puts report.print_queue
