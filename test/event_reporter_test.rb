@@ -4,38 +4,6 @@ require "./lib/event_reporter"
 
 class EventReporterTest < Minitest::Test
 
-
-  def test_it_can_format_zipcodes_to_correct_length
-    report = EventReporter.new
-
-    assert_equal 5, report.clean_zipcode("123456").length
-    assert_equal 5, report.clean_zipcode("1234").length
-    assert_equal 5, report.clean_zipcode("12345").length
-  end
-
-  def test_it_can_format_phone_to_correct_length
-    report = EventReporter.new
-
-    assert_equal 10, report.clean_phone("12345678923").length
-    assert_equal 10, report.clean_phone("5556781234").length
-    assert_equal 10, report.clean_phone("12345").length
-    assert_equal 10, report.clean_phone(nil).length
-  end
-
-  def test_it_removes_leading_trailing_white_spaces_first_name
-    report = EventReporter.new
-    first_name = "  Erin  "
-
-    assert_equal "Erin", report.clean_first_name(first_name)
-  end
-
-  def test_it_removes_leading_trailing_white_spaces_last_name
-    report = EventReporter.new
-    last_name = "  Pintozzi      "
-
-    assert_equal "Pintozzi", report.clean_last_name(last_name)
-  end
-
   def test_it_can_load_a_file
     report = EventReporter.new
 

@@ -1,10 +1,10 @@
 class DataManipulation
 
-  def clean_zipcode(zipcode)
+  def self.clean_zipcode(zipcode)
     zipcode.to_s.rjust(5, "0")[0..4]
   end
 
-  def clean_phone(phone)
+  def self.clean_phone(phone)
     return "0000000000" if phone.nil?
     phone = phone.to_s.gsub(/\D/, "")
     if phone.length == 10
@@ -16,11 +16,11 @@ class DataManipulation
     end
   end
 
-  def clean_first_name(first_name)
+  def self.clean_first_name(first_name)
     first_name.strip
   end
 
-  def clean_last_name(last_name)
+  def self.clean_last_name(last_name)
     last_name.strip
   end
 

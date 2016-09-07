@@ -15,6 +15,6 @@ class Person
   end
 
   def to_s
-    "#{@first_name} #{@last_name}"
+    "#{@last_name} #{@first_name} #{@email_address} #{@zipcode} #{@city} #{@state} #{@street} #{@home_phone}"
   end
 end
