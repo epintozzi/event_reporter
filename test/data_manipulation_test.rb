@@ -22,6 +22,7 @@ class DataManipulationTest < Minitest::Test
     assert_equal "5551236789", DataManipulation.clean_phone("15551236789")
     assert_equal "5551236789", DataManipulation.clean_phone("5551236789")
     assert_equal "5551236789", DataManipulation.clean_phone("1(555)123-6789")
+    assert_equal "0000000000", DataManipulation.clean_phone("551236789")
   end
 
   def test_it_removes_leading_trailing_white_spaces_first_name

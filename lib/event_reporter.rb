@@ -1,6 +1,7 @@
 require "csv"
 require "./lib/Person"
 require "./lib/data_manipulation"
+require "./lib/exporter"
 require 'pry'
 require 'sunlight-congress'
 
@@ -39,17 +40,14 @@ class EventReporter
     @queue = []
   end
 
+  def save_to_csv
+    exporter = Exporter.new
+    exporter.save_to_csv(@queue)
+  end
+
   def queue_district_by_zipcode(zipcode)
     Sunlight::Congress::District.by_zipcode(zipcode)
   end
-
-  # def queue_district
-  #   zipcode = clean_zipcode(zipcode)
-  #   if queue_count <= 20
-  #     queue_district_by_zipcode(zipcode)
-  #   end
-  #   return "#{queue_district_by_zipcode}"
-  # end
 
   # def find(attribute, criteria)
   #
@@ -94,13 +92,15 @@ class EventReporter
 end
 
 report = EventReporter.new
-
-puts report.help("queue count")
-
-puts report.queue_count
-puts report.create_queue
-puts report.queue_count
-report.queue_clear
-puts report.queue_count
+report.create_queue
+# puts report.save_to_csv
+#
+# puts report.help("queue count")
+#
+# puts report.queue_count
+# puts report.create_queue
+# puts report.queue_count
+# report.queue_clear
+# puts report.queue_count
 # puts report.queue_district_by_zipcode("60402")
 # puts report.queue_district
