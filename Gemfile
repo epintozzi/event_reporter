@@ -7,3 +7,4 @@ gem 'sunlight-congress', git: 'git@github.com:steveklabnik/sunlight-congress.git
 gem 'pry'
 gem 'rake'
 gem 'minitest'
+gem 'terminal-table'

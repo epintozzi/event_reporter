@@ -45,14 +45,14 @@ class EventReporter
     exporter.save_to_csv(@queue)
   end
 
+  def print_queue
+    exporter = Exporter.new
+    exporter.print_queue(@queue)
+  end
+
   def queue_district_by_zipcode(zipcode)
     Sunlight::Congress::District.by_zipcode(zipcode)
   end
-
-  # def find(attribute, criteria)
-  #
-  #
-  # end
 
   def get_command
     print "Please enter a command"
@@ -94,13 +94,4 @@ end
 report = EventReporter.new
 report.create_queue
 # puts report.save_to_csv
-#
-# puts report.help("queue count")
-#
-# puts report.queue_count
-# puts report.create_queue
-# puts report.queue_count
-# report.queue_clear
-# puts report.queue_count
-# puts report.queue_district_by_zipcode("60402")
-# puts report.queue_district
+puts report.print_queue
