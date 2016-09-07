@@ -1,0 +1,30 @@
+GIT
+  remote: git@github.com:steveklabnik/sunlight-congress.git
+  revision: a3c55e89c3f18adaaaf56606f19fbd1872d62bc2
+  specs:
+    sunlight-congress (1.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coderay (1.1.1)
+    method_source (0.8.2)
+    minitest (5.9.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    rake (10.4.2)
+    slop (3.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  minitest
+  pry
+  rake
+  sunlight-congress!
+
+BUNDLED WITH
+   1.12.5
