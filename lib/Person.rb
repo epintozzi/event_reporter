@@ -1,5 +1,5 @@
 class Person
-  attr_accessor :id, :reg_date, :first_name, :last_name, :email_address, :home_phone, :street, :city, :zipcode, :state
+  attr_accessor :id, :reg_date, :first_name, :last_name, :email_address, :home_phone, :street, :city, :zipcode, :state, :district
 
   def initialize(id, reg_date, first_name, last_name, email_address, home_phone, street, city, state, zipcode)
     @id = id
@@ -12,6 +12,7 @@ class Person
     @city = city
     @state = state
     @zipcode = zipcode
+    @district = "unknown"
   end
 
   def to_s
