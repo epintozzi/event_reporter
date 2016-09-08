@@ -15,20 +15,52 @@ class EventReporter
   end
 
 
-  def load_file(filename = "./event_attendees_short.csv")
+  def open_file(filename = "./event_attendees.csv")
 
     contents = CSV.open filename, headers: true, header_converters: :symbol
 
     return contents
   end
 
-  def create_queue
-    load_file.each do |row|
+  def load_file
+    @full_list = []
+    open_file.each do |row|
       person = Person.new(row[0], row[:regdate], DataManipulation.clean_first_name(row[:first_name]), DataManipulation.clean_last_name(row[:last_name]), row[:email_address], DataManipulation.clean_phone(row[:homephone]), row[:street], row[:city], row[:state], DataManipulation.clean_zipcode(row[:zipcode]))
 
-      @queue << person
+      @full_list << person
+    end
+    return @full_list
+  end
+
+  def find(attribute, criteria)
+    @queue = []
+    @full_list.each do |person|
+      if person.send(attribute.to_sym).downcase == criteria.downcase
+        @queue << person
+      end
     end
     return @queue
+  end
+
+  def print_sorted_queue(attribute)
+    sorted_queue = @queue.sort_by do |person|
+      person.send(attribute.to_sym)
+    end
+    print_queue(sorted_queue)
+  end
+
+  def export_sorted_queue(attribute)
+    sorted_queue = @queue.sort_by do |person|
+      person.send(attribute.to_sym)
+    end
+    export_to_html(sorted_queue)
+  end
+
+  def save_sorted_queue(attribute)
+    sorted_queue = @queue.sort_by do |person|
+      person.send(attribute.to_sym)
+    end
+    save_to_csv(sorted_queue)
   end
 
   def queue_count
@@ -40,19 +72,19 @@ class EventReporter
     @queue = []
   end
 
-  def save_to_csv
+  def save_to_csv(queue = @queue)
     exporter = Exporter.new
-    exporter.save_to_csv(@queue)
+    exporter.save_to_csv(queue)
   end
 
-  def print_queue
+  def print_queue(queue = @queue)
     exporter = Exporter.new
-    exporter.print_queue(@queue)
+    puts exporter.print_queue(queue)
   end
 
-  def export_to_html
+  def export_to_html(queue = @queue)
     exporter = Exporter.new
-    exporter.export_to_html(@queue)
+    exporter.export_to_html(queue)
   end
 
   def queue_district_by_zipcode(zipcode)
@@ -64,7 +96,7 @@ class EventReporter
     gets.chomp
   end
 
-  def help
+  def help_list
     "You can use the following commands: 'queue count', 'queue clear', 'queue district', 'queue print', 'queue print by', 'queue save to', 'queue export html', and 'find'."
   end
 
@@ -97,7 +129,12 @@ class EventReporter
 end
 
 report = EventReporter.new
-report.create_queue
-report.export_to_html
+report.load_file
+report.find("first_name", "Mary")
+report.save_to_csv
+report.save_sorted_queue("zipcode")
+# report.find("first_name", "Joe")
+# report.print_sorted_queue("zipcode")
+# report.export_to_html
 # puts report.save_to_csv
 # puts report.print_queue
