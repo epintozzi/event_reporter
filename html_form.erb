@@ -19,6 +19,7 @@
       <th>State</th>
       <th>Address</th>
       <th>Phone</th>
+      <th>District</th>
     </tr>
     <% queue.each do |person| %>
       <tr>
@@ -30,6 +31,7 @@
         <td><%= "#{person.state}"%></td>
         <td><%= "#{person.street}"%></td>
         <td><%= "#{person.home_phone}"%></td>
+        <td><%= "#{person.district}"%></td>
       </tr>
     <% end %>
   </table>

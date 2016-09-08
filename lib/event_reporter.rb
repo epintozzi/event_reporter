@@ -87,8 +87,14 @@ class EventReporter
     exporter.export_to_html(queue)
   end
 
-  def queue_district_by_zipcode(zipcode)
-    Sunlight::Congress::District.by_zipcode(zipcode)
+  def queue_district_by_zipcode
+    if @queue.length <= 10
+      @queue.each do |person|
+        person.district = Sunlight::Congress::District.by_zipcode(person.zipcode).district
+      end
+    else
+      "unknown"
+    end
   end
 
   def get_command
@@ -130,11 +136,12 @@ end
 
 report = EventReporter.new
 report.load_file
-report.find("first_name", "Mary")
+report.find("first_name", "Abigail")
+report.queue_district_by_zipcode
 report.save_to_csv
-report.save_sorted_queue("zipcode")
+# report.save_sorted_queue("zipcode")
 # report.find("first_name", "Joe")
-# report.print_sorted_queue("zipcode")
-# report.export_to_html
+report.print_sorted_queue("zipcode")
+report.export_to_html
 # puts report.save_to_csv
 # puts report.print_queue
