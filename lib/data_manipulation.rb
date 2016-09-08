@@ -24,4 +24,6 @@ class DataManipulation
     last_name.strip
   end
 
+  #do I want to strip city and street? or format state?
+
 end

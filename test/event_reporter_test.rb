@@ -4,30 +4,59 @@ require "./lib/event_reporter"
 
 class EventReporterTest < Minitest::Test
 
-  def test_it_can_open_a_file
+  def test_it_initializes
     report = EventReporter.new
 
-    assert report.open_file("event_attendees.csv")
-    assert report.open_file()
+    assert report
   end
 
-  def test_it_loads_a_file
+  def test_it_can_load_a_file
     report = EventReporter.new
 
-    assert report.load_file
+    assert report.load_file("event_attendees.csv")
+    assert report.load_file()
   end
+
 #fix
-  def test_queue_is_not_empty
-    skip
+  def test_queue_is_empty
     report = EventReporter.new
 
-    refute_empty report.create_queue
+    assert_equal [], report.queue
   end
 
-  def test_it_shows_list_of_help_items
+  def test_accurate_queue_count
     report = EventReporter.new
+    report.load_file("event_attendees_short.csv")
 
-    assert_equal "You can use the following commands: 'queue count', 'queue clear', 'queue district', 'queue print', 'queue print by', 'queue save to', 'queue export html', and 'find'.",  report.help_list
+    assert_equal 0, report.queue_count
+
+    report.find("first_name", "shannon")
+
+    assert_equal 2, report.queue_count
+  end
+
+  def test_it_can_find_attendees
+    report = EventReporter.new
+    report.load_file("event_attendees_short.csv")
+
+    assert_equal 0, report.queue_count
+
+    report.find("first_name", "Sarah")
+
+    assert_equal 2, report.queue_count
+  end
+
+  def test_it_can_clear_queue
+    report = EventReporter.new
+    report.load_file("event_attendees_short.csv")
+
+    assert_equal [], report.queue
+
+    report.find("first_name", "shannon")
+
+    assert_equal 2, report.queue_count
+
+    assert_equal [], report.queue_clear
   end
 
 end
