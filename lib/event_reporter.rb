@@ -136,12 +136,12 @@ end
 
 report = EventReporter.new
 report.load_file
-report.find("first_name", "Abigail")
+report.find("first_name", "Mary")
 report.queue_district_by_zipcode
-report.save_to_csv
+# report.save_to_csv
 # report.save_sorted_queue("zipcode")
 # report.find("first_name", "Joe")
-report.print_sorted_queue("zipcode")
+# report.print_sorted_queue("zipcode")
 report.export_to_html
 # puts report.save_to_csv
 # puts report.print_queue

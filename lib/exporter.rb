@@ -22,9 +22,7 @@ class Exporter
     File.open(filename, "w") do |file|
       file.puts html_form
     end
-
-    template = File.read "html_form.erb"
-    erb_template = ERB.new template
+    %x[open #{File.expand_path(filename)}]
   end
 
   def print_queue(queue)
