@@ -1,7 +1,18 @@
-require "pry"
-
 
 class Help
+
+  def help_list
+     puts "You can use the following commands:"
+     puts 'load'
+     puts 'queue count'
+     puts 'queue clear'
+     puts 'queue district'
+     puts 'queue print'
+     puts 'queue print by'
+     puts 'queue save to'
+     puts 'queue export html'
+     puts 'find'
+  end
 
   def help(input)
     case input.downcase
@@ -21,10 +32,10 @@ class Help
       return "This command exports the current queue to the specified filename as a valid HTML file."
     when "find"
       return "This command loads the queue with all records matching the criteria for the given attribute."
-    when "help"
-      return "You can use the following commands: 'load', 'queue count', 'queue clear', 'queue district', 'queue print', 'queue print by', 'queue save to', 'queue export html', and 'find'."
+    when "load"
+      return "This command erases any previously loaded data, and then loads event_attendees.csv unless a different file is specified by the user."
     else
-      "That command doesn't exist. For a list of commands, type help."
+      "That command doesn't exist. For a list of commands, type 'help'."
     end
   end
 end

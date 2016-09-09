@@ -14,5 +14,4 @@ class Person
     @zipcode = zipcode
     @district = "unknown"
   end
-
 end
