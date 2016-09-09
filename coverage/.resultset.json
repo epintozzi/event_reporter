@@ -220,22 +220,22 @@
         null,
         null
       ],
-      "/Users/ebarth26/turing/1module/event_reporter/lib/Person.rb": [
+      "/Users/ebarth26/turing/1module/event_reporter/lib/person.rb": [
         1,
         1,
         null,
         1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
+        10423,
         null,
         null
       ],
@@ -312,25 +312,6 @@
         1,
         null,
         1,
-        null,
-        null
-      ],
-      "/Users/ebarth26/turing/1module/event_reporter/lib/person.rb": [
-        1,
-        1,
-        null,
-        1,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
-        10423,
         null,
         null
       ],
@@ -486,6 +467,6 @@
         null
       ]
     },
-    "timestamp": 1473392874
+    "timestamp": 1473394002
   }
 }
