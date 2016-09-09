@@ -1,5 +1,5 @@
 require "csv"
-require "./lib/Person"
+require "./lib/person"
 require "./lib/data_manipulation"
 require "./lib/exporter"
 require 'pry'
