@@ -24,4 +24,27 @@ class DataManipulation
     last_name.strip
   end
 
+  def self.clean_city(city)
+    if city
+    city.strip
+    else
+      return ""
+    end
+  end
+
+  def self.clean_street(street)
+    if street
+    street.strip
+    else
+      return ""
+    end
+  end
+
+  def self.clean_state(state)
+    if state
+    state.strip
+    else
+      return ""
+    end
+  end
 end

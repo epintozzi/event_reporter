@@ -14,8 +14,4 @@ class Person
     @zipcode = zipcode
     @district = "unknown"
   end
-
-  def to_s
-    "#{@last_name} #{@first_name} #{@email_address} #{@zipcode} #{@city} #{@state} #{@street} #{@home_phone}"
-  end
 end
